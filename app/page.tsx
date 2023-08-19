@@ -17,7 +17,7 @@ export default async function Home() {
             <h2>{question.QuestionText}</h2>
             <h3>Choices:</h3>
             <ul>
-              {question.Choices.map((choice: prisma.PollsChoice) => (
+              {question.Choices.map((choice: any) => (
                 <li key={choice.id}>{choice.ChoiceText}</li>
               ))}
             </ul>
