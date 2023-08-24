@@ -300,26 +300,30 @@ async function Home() {
     });
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("h1", {
-                children: "questions"
+            /*#__PURE__*/ jsx_runtime_.jsx("h2", {
+                children: "Questions"
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx("ul", {
-                children: questions.map((question)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("h2", {
-                                children: question.QuestionText
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("h3", {
-                                children: "Choices:"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("ul", {
-                                children: question.Choices.map((choice)=>/*#__PURE__*/ jsx_runtime_.jsx("li", {
+            questions.map((question)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx("h3", {
+                            children: question.QuestionText
+                        }),
+                        question.Choices.map((choice)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("label", {
+                                        htmlFor: choice.id,
                                         children: choice.ChoiceText
-                                    }, choice.id))
-                            })
-                        ]
-                    }, question.Id))
-            })
+                                    }),
+                                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                                        type: "radio",
+                                        id: choice.id,
+                                        name: question.Id,
+                                        value: choice.id
+                                    })
+                                ]
+                            }, choice.id))
+                    ]
+                }, question.Id))
         ]
     });
 }

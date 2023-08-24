@@ -1,4 +1,4 @@
-import { PrismaClient} from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -6,25 +6,27 @@ export default async function Home() {
   const questions = await prisma.pollsQuestion.findMany({
     include: {
       Choices: true,
-  }});
+    }
+  });
 
   return (
-      <div>
-      <h1>questions</h1>
-      <ul>
-        {questions.map((question : any) => (
-          <li key={question.Id}>
-            <h2>{question.QuestionText}</h2>
-            <h3>Choices:</h3>
-            <ul>
-              {question.Choices.map((choice: any) => (
-                <li key={choice.id}>{choice.ChoiceText}</li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <div>
+      <h2>Questions</h2>
+      {questions.map((question: any) => (
+        <div key={question.Id}>
+          <h3>{question.QuestionText}</h3>
+          {question.Choices.map((choice: any) => (
+            <div key={choice.id}>
+              <label htmlFor={choice.id}>
+                {choice.ChoiceText}
+              </label>
+              <input type="radio" id={choice.id} name={question.Id} value={choice.id} />
+            </div>
+          ))}
+        </div >
+      ))
+      }
+    </div >
   );
 };
 
