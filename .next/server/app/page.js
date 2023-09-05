@@ -281,7 +281,8 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ Home)
+  "default": () => (/* binding */ Home),
+  dynamic: () => (/* binding */ dynamic)
 });
 
 // EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
@@ -292,6 +293,7 @@ const client_namespaceObject = require("@prisma/client");
 
 
 const prisma = new client_namespaceObject.PrismaClient();
+const dynamic = "force-dynamic";
 async function Home() {
     const questions = await prisma.pollsQuestion.findMany({
         include: {
