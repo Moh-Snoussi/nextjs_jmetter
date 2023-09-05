@@ -6,21 +6,23 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model PollsQuestion {
-  Id        Int       @id @default(autoincrement())
-  QuestionText String    // varchar(200)
-  PubDate    DateTime  // datetime(6)
+  Id        Int       @id @default(autoincrement()) @map("id")
+  QuestionText String    @map("question_text")
+  PubDate    DateTime  @map("pub_date")
   Choices    PollsChoice[]
+  @@map("polls_question")
 }
 
 model PollsChoice {
-  Id         Int         @id @default(autoincrement())
-  ChoiceText String
-  Votes      Int
-  QuestionId Int
+  Id         Int         @id @default(autoincrement()) @map("id")
+  ChoiceText String @map("choice_text")
+  Votes      Int @map("votes")
+  QuestionId Int @map("question_id")
   question   PollsQuestion @relation(fields: [QuestionId], references: [Id])
+  @@map("polls_choice")
 }
